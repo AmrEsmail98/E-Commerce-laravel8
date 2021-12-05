@@ -16,6 +16,9 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/chosen.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" integrity="sha512-KRrxEp/6rgIme11XXeYvYRYY/x6XPGwk0RsIC6PyMRc072vj2tcjBzFmn939xzjeDhj0aDO7TDMd7Rbz3OEuBQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     @livewireStyles
 </head>
 <body class="home-page home-01 ">
@@ -78,6 +81,9 @@
 										</li>
                                         <li class="menu-item">
                                             <a title="Categories" href="{{route('admin.categories')}}">Categories</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a title="Products" href="{{route('admin.products')}}">All products</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form') .submit();"> Logout</a>
@@ -464,6 +470,9 @@
 	<script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.sticky.js')}}"></script>
 	<script src="{{asset('assets/js/functions.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js" integrity="sha512-EnXkkBUGl2gBm/EIZEgwWpQNavsnBbeMtjklwAa7jLj60mJk932aqzXFmdPKCG6ge/i8iOCK0Uwl1Qp+S0zowg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     @livewireScripts
+    @stack('scripts')
 </body>
 </html>
