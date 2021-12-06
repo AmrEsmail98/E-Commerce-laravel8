@@ -7,7 +7,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-6">
-                                Add New Product
+                                Edit Product
                             </div>
                             <div class="col-md-6">
                                 <a href="{{route('admin.products')}}" class="btn btn-primary pull-right">All
@@ -19,7 +19,7 @@
                         @if(Session::has('message'))
                         <div class="alert alert-success" role="alert" >{{Session::get('message')}}</div>
                         @endif
-                        <form class="form-horizontal" enctype="multipart/form-data" wire:submit.prevent="addProduct">
+                        <form class="form-horizontal" enctype="multipart/form-data" wire:submit.prevent="updateproduct">
                             <div class="form-group">
                                 <label class="col-md-4 control-label"> Product Name</label>
                                 <div class="col-md-4">
@@ -89,9 +89,11 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Product Image</label>
                                 <div class="col-md-4">
-                                    <input type="file" class="input-file" wire:model="image"/>
-                                    @if($image)
-                                    <img src="{{$image->temporaryUrl()}}" width="120"/>
+                                    <input type="file" class="input-file" wire:model="newimage"/>
+                                    @if($newimage)
+                                    <img src="{{$newimage->temporaryUrl()}}" width="120"/>
+                                    @else
+                                    <img src="{{asset('assets/images/products')}}/{{$image}}" width="120"/>
                                     @endif
                                 </div>
                             </div>
@@ -110,7 +112,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                    <button type="submit" class="btn btn-outline-primary">Update</button>
                                 </div>
                             </div>
                     </div>
