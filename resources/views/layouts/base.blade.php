@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" integrity="sha512-KRrxEp/6rgIme11XXeYvYRYY/x6XPGwk0RsIC6PyMRc072vj2tcjBzFmn939xzjeDhj0aDO7TDMd7Rbz3OEuBQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" integrity="sha512-WWc9iSr5tHo+AliwUnAQN1RfGK9AnpiOFbmboA0A0VJeooe69YR2rLgHw13KxF1bOSLmke+SNnLWxmZd8RTESQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @livewireStyles
 </head>
@@ -42,12 +43,15 @@
 								<li class="menu-item" >
 									<a title="Hotline: +201090807013" href="#" ><span class="icon label-before fa fa-mobile"></span>Hotline: +201090807013</a>
 								</li>
+
 							</ul>
+
 						</div>
+
 						<div class="topbar-menu right-menu">
 							<ul>
 
-								<li class="menu-item lang-menu menu-item-has-children parent">
+								{{-- <li class="menu-item lang-menu menu-item-has-children parent">
 									<a title="English" href="#"><span class="img label-before"><img src="assets/images/lang-en.png" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="submenu lang" >
 										<li class="menu-item" ><a title="hungary" href="#"><span class="img label-before"><img src="assets/images/lang-hun.png" alt="lang-hun"></span>Hungary</a></li>
@@ -55,8 +59,8 @@
 										<li class="menu-item" ><a title="french" href="#"><span class="img label-before"><img src="assets/images/lang-fra.png" alt="lang-fre"></span>French</a></li>
 										<li class="menu-item" ><a title="canada" href="#"><span class="img label-before"><img src="assets/images/lang-can.png" alt="lang-can"></span>Canada</a></li>
 									</ul>
-								</li>
-								<li class="menu-item menu-item-has-children parent" >
+								</li> --}}
+								{{-- <li class="menu-item menu-item-has-children parent" >
 									<a title="Dollar (USD)" href="#">Dollar (USD)<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="submenu curency" >
 										<li class="menu-item" >
@@ -69,7 +73,7 @@
 											<a title="Dollar (USD)" href="#">Dollar (USD)</a>
 										</li>
 									</ul>
-								</li>
+								</li> --}}
                                 @if(Route::has('login'))
                                 @auth
                                  @if(Auth::user()->utype==='ADM')
@@ -84,6 +88,10 @@
                                         </li>
                                         <li class="menu-item">
                                             <a title="Products" href="{{route('admin.products')}}">All products</a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <a title="Sale_Setting" href="{{route('admin.sale')}}">Sale Setting</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form') .submit();"> Logout</a>
@@ -124,9 +132,7 @@
 				<div class="container">
 					<div class="mid-section main-info-area">
 
-						<div class="wrap-logo-top left-section">
-							<a href="index.html" class="link-to-home"><img src=" {{asset('assets/images/logo-top-1.png')}}" alt="mercado"></a>
-						</div>
+
 
 						@livewire('header-search-component')
 
@@ -264,15 +270,15 @@
 										<ul>
 											<li>
 												<i class="fa fa-map-marker" aria-hidden="true"></i>
-												<p class="contact-txt">45 Grand Central Terminal New York,NY 1017 United State USA</p>
+												<p class="contact-txt">Ahmed Maher ST , ELmansoura , Egypt</p>
 											</li>
 											<li>
 												<i class="fa fa-phone" aria-hidden="true"></i>
-												<p class="contact-txt">(+123) 456 789 - (+123) 666 888</p>
+												<p class="contact-txt">+201090807013</p>
 											</li>
 											<li>
 												<i class="fa fa-envelope" aria-hidden="true"></i>
-												<p class="contact-txt">Contact@yourcompany.com</p>
+												<p class="contact-txt">amroesmail98@gmail.com</p>
 											</li>
 										</ul>
 									</div>
@@ -286,8 +292,8 @@
 								<h3 class="item-header">Hot Line</h3>
 								<div class="item-content">
 									<div class="wrap-hotline-footer">
-										<span class="desc">Call Us toll Free</span>
-										<b class="phone-number">(+123) 456 789 - (+123) 666 888</b>
+										<span class="desc">Call my </span>
+										<b class="phone-number"> +201090807013 </b>
 									</div>
 								</div>
 							</div>
@@ -443,7 +449,7 @@
 			<div class="coppy-right-box">
 				<div class="container">
 					<div class="coppy-right-item item-left">
-						<p class="coppy-right-text">Copyright © 2020 Surfside Media. All rights reserved</p>
+						<p class="coppy-right-text">Copyright © 2022 Eng/Amr Esmail. All rights reserved</p>
 					</div>
 					<div class="coppy-right-item item-right">
 						<div class="wrap-nav horizontal-nav">
@@ -471,6 +477,8 @@
 	<script src="{{asset('assets/js/jquery.sticky.js')}}"></script>
 	<script src="{{asset('assets/js/functions.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js" integrity="sha512-EnXkkBUGl2gBm/EIZEgwWpQNavsnBbeMtjklwAa7jLj60mJk932aqzXFmdPKCG6ge/i8iOCK0Uwl1Qp+S0zowg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" integrity="sha512-Y+0b10RbVUTf3Mi0EgJue0FoheNzentTMMIE2OreNbqnUPNbQj8zmjK3fs5D2WhQeGWIem2G2UkKjAL/bJ/UXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     @livewireScripts
     @stack('scripts')

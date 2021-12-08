@@ -74,7 +74,7 @@
 									</fieldset>
 									<fieldset class="wrap-input">
 										<label for="frm-login-pass">Password:</label>
-										<input type="password" id="frm-login-pass" name="password" placeholder="************" required autofocus="Current password">
+										<input type="password" id="frm-login-pass" name="password" placeholder="************" required autocomplete="current-password">
 									</fieldset>
 
 									<fieldset class="wrap-input">

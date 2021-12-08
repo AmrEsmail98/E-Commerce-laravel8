@@ -1,4 +1,14 @@
 <main id="main" class="main-site">
+    <style>
+        .regprice {
+            font-weight: 300;
+            font-size: 13px !important;
+            color: #aaaaaa !important;
+            text-decoration: line-through;
+            padding-left: 10px;
+        }
+
+    </style>
 
     <div class="container">
 
@@ -14,12 +24,13 @@
                 <div class="wrap-product-detail">
                     <div class="detail-media">
                         <div class="product-gallery">
-                          <ul class="slides">
+                            <ul class="slides">
 
-                            <li data-thumb="{{ asset('assets/images/products')}}/{{$product->image}}">
-                                <img src="{{ asset('assets/images/products')}}/{{$product->image}}" alt="{{$product->name}}" />
-                            </li>
-                          </ul>
+                                <li data-thumb="{{ asset('assets/images/products') }}/{{ $product->image }}">
+                                    <img src="{{ asset('assets/images/products') }}/{{ $product->image }}"
+                                        alt="{{ $product->name }}" />
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="detail-info">
@@ -31,27 +42,43 @@
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <a href="#" class="count-review">(05 review)</a>
                         </div>
-                        <h2 class="product-name">{{$product->name}}</h2>
+                        <h2 class="product-name">{{ $product->name }}</h2>
                         <div class="short-desc">
-                            {{$product->short_description}}
+                            {{ $product->short_description }}
                         </div>
                         <div class="wrap-social">
-                            <a class="link-socail" href="#"><img src="{{ asset('assets/images/social-list.png')}}" alt=""></a>
+                            <a class="link-socail" href="#"><img src="{{ asset('assets/images/social-list.png') }}"
+                                    alt=""></a>
                         </div>
-                        <div class="wrap-price"><span class="product-price">${{$product->regular_price}}</span></div>
+                        @if ($product->sale_price > 0 && $sale->status==1 && $sale->sale_date > Carbon\Carbon::now())
+                            <div class="wrap-price"><span class="product-price">${{ $product->sale_price }}</span>
+                                <del><span class="product-price regprice">${{ $product->regular_price }}</span></del>
+                            </div>
+                        @else
+                            <div class="wrap-price"><span
+                                    class="product-price">${{ $product->regular_price }}</span></div>
+                        @endif
                         <div class="stock-info in-stock">
-                            <p class="availability">Availability: <b>{{$product->stock_status}}</b></p>
+                            <p class="availability">Availability: <b>{{ $product->stock_status }}</b></p>
                         </div>
                         <div class="quantity">
                             <span>Quantity:</span>
                             <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
+                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*">
                                 <a class="btn btn-reduce" href="#"></a>
                                 <a class="btn btn-increase" href="#"></a>
                             </div>
                         </div>
                         <div class="wrap-butons">
-                            <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add to Cart</a>
+                            @if ($product->sale_price > 0 && $sale->status==1 && $sale->sale_date > Carbon\Carbon::now())
+                            <a href="#" class="btn add-to-cart"
+                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->sale_price }})">Add
+                                to Cart</a>
+                            @else
+                            <a href="#" class="btn add-to-cart"
+                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->regular_price }})">Add
+                                to Cart</a>
+                                @endif
                             <div class="wrap-btn">
                                 <a href="#" class="btn btn-compare">Add Compare</a>
                                 <a href="#" class="btn btn-wishlist">Add Wishlist</a>
@@ -66,19 +93,24 @@
                         </div>
                         <div class="tab-contents">
                             <div class="tab-content-item active" id="description">
-                        {{$product->description}}
+                                {{ $product->description }}
                             </div>
                             <div class="tab-content-item " id="add_infomation">
                                 <table class="shop_attributes">
                                     <tbody>
                                         <tr>
-                                            <th>Weight</th><td class="product_weight">1 kg</td>
+                                            <th>Weight</th>
+                                            <td class="product_weight">1 kg</td>
                                         </tr>
                                         <tr>
-                                            <th>Dimensions</th><td class="product_dimensions">12 x 15 x 23 cm</td>
+                                            <th>Dimensions</th>
+                                            <td class="product_dimensions">12 x 15 x 23 cm</td>
                                         </tr>
                                         <tr>
-                                            <th>Color</th><td><p>Black, Blue, Grey, Violet, Yellow</p></td>
+                                            <th>Color</th>
+                                            <td>
+                                                <p>Black, Blue, Grey, Violet, Yellow</p>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -88,22 +120,28 @@
                                 <div class="wrap-review-form">
 
                                     <div id="comments">
-                                        <h2 class="woocommerce-Reviews-title">01 review for <span>Radiant-360 R6 Chainsaw Omnidirectional [Orage]</span></h2>
+                                        <h2 class="woocommerce-Reviews-title">01 review for <span>Radiant-360 R6
+                                                Chainsaw Omnidirectional [Orage]</span></h2>
                                         <ol class="commentlist">
-                                            <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
+                                            <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1"
+                                                id="li-comment-20">
                                                 <div id="comment-20" class="comment_container">
-                                                    <img alt="" src="{{ asset('assets/images/author-avata.jpg')}}" height="80" width="80">
+                                                    <img alt="" src="{{ asset('assets/images/author-avata.jpg') }}"
+                                                        height="80" width="80">
                                                     <div class="comment-text">
                                                         <div class="star-rating">
-                                                            <span class="width-80-percent">Rated <strong class="rating">5</strong> out of 5</span>
+                                                            <span class="width-80-percent">Rated <strong
+                                                                    class="rating">5</strong> out of 5</span>
                                                         </div>
                                                         <p class="meta">
                                                             <strong class="woocommerce-review__author">admin</strong>
                                                             <span class="woocommerce-review__dash">–</span>
-                                                            <time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >Tue, Aug 15,  2017</time>
+                                                            <time class="woocommerce-review__published-date"
+                                                                datetime="2008-02-14 20:00">Tue, Aug 15, 2017</time>
                                                         </p>
                                                         <div class="description">
-                                                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                                            <p>Pellentesque habitant morbi tristique senectus et netus
+                                                                et malesuada fames ac turpis egestas.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -115,9 +153,12 @@
                                         <div id="review_form">
                                             <div id="respond" class="comment-respond">
 
-                                                <form action="#" method="post" id="commentform" class="comment-form" novalidate="">
+                                                <form action="#" method="post" id="commentform" class="comment-form"
+                                                    novalidate="">
                                                     <p class="comment-notes">
-                                                        <span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
+                                                        <span id="email-notes">Your email address will not be
+                                                            published.</span> Required fields are marked <span
+                                                            class="required">*</span>
                                                     </p>
                                                     <div class="comment-form-rating">
                                                         <span>Your rating</span>
@@ -132,24 +173,30 @@
                                                             <label for="rated-4"></label>
                                                             <input type="radio" id="rated-4" name="rating" value="4">
                                                             <label for="rated-5"></label>
-                                                            <input type="radio" id="rated-5" name="rating" value="5" checked="checked">
+                                                            <input type="radio" id="rated-5" name="rating" value="5"
+                                                                checked="checked">
                                                         </p>
                                                     </div>
                                                     <p class="comment-form-author">
-                                                        <label for="author">Name <span class="required">*</span></label>
+                                                        <label for="author">Name <span
+                                                                class="required">*</span></label>
                                                         <input id="author" name="author" type="text" value="">
                                                     </p>
                                                     <p class="comment-form-email">
-                                                        <label for="email">Email <span class="required">*</span></label>
-                                                        <input id="email" name="email" type="email" value="" >
+                                                        <label for="email">Email <span
+                                                                class="required">*</span></label>
+                                                        <input id="email" name="email" type="email" value="">
                                                     </p>
                                                     <p class="comment-form-comment">
-                                                        <label for="comment">Your review <span class="required">*</span>
+                                                        <label for="comment">Your review <span
+                                                                class="required">*</span>
                                                         </label>
-                                                        <textarea id="comment" name="comment" cols="45" rows="8"></textarea>
+                                                        <textarea id="comment" name="comment" cols="45"
+                                                            rows="8"></textarea>
                                                     </p>
                                                     <p class="form-submit">
-                                                        <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+                                                        <input name="submit" type="submit" id="submit"
+                                                            class="submit" value="Submit">
                                                     </p>
                                                 </form>
 
@@ -162,7 +209,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!--end main products area-->
+            </div>
+            <!--end main products area-->
 
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
                 <div class="widget widget-our-services ">
@@ -175,7 +223,8 @@
                                     <div class="right-content">
                                         <b class="title">Free Shipping</b>
                                         <span class="subtitle">On Oder Over $99</span>
-                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
+                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...
+                                        </p>
                                     </div>
                                 </a>
                             </li>
@@ -186,7 +235,8 @@
                                     <div class="right-content">
                                         <b class="title">Special Offer</b>
                                         <span class="subtitle">Get a gift!</span>
-                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
+                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...
+                                        </p>
                                     </div>
                                 </a>
                             </li>
@@ -197,7 +247,8 @@
                                     <div class="right-content">
                                         <b class="title">Order Return</b>
                                         <span class="subtitle">Return within 7 days</span>
-                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
+                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...
+                                        </p>
                                     </div>
                                 </a>
                             </li>
@@ -209,60 +260,78 @@
                     <h2 class="widget-title">Popular Products</h2>
                     <div class="widget-content">
                         <ul class="products">
-                            @foreach($popular_products as $p_product)
-                            <li class="product-item">
-                                <div class="product product-widget-style">
-                                    <div class="thumbnnail">
-                                        <a href="{{route('product.details',['slug'=>$p_product->slug])}}" title="{{$p_product->name}}">
-                                            <figure><img src="{{ asset('assets/images/products')}}/{{$p_product->image}}" alt="{{$p_product->name}}"></figure>
-                                        </a>
+                            @foreach ($popular_products as $p_product)
+                                <li class="product-item">
+                                    <div class="product product-widget-style">
+                                        <div class="thumbnnail">
+                                            <a href="{{ route('product.details', ['slug' => $p_product->slug]) }}"
+                                                title="{{ $p_product->name }}">
+                                                <figure><img
+                                                        src="{{ asset('assets/images/products') }}/{{ $p_product->image }}"
+                                                        alt="{{ $p_product->name }}"></figure>
+                                            </a>
+                                        </div>
+                                        <div class="product-info">
+                                            <a href="{{ route('product.details', ['slug' => $p_product->slug]) }}"
+                                                title="{{ $p_product->name }}"
+                                                class="product-name"><span>{{ $p_product->name }}</span></a>
+                                            <div class="wrap-price"><span
+                                                    class="product-price">${{ $p_product->regular_price }}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="product-info">
-                                        <a href="{{route('product.details',['slug'=>$p_product->slug])}}" title="{{$p_product->name}}" class="product-name"><span>{{$p_product->name}}</span></a>
-                                        <div class="wrap-price"><span class="product-price">${{$p_product->regular_price}}</span></div>
-                                    </div>
-                                </div>
-                            </li>
-                                  @endforeach
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
 
-            </div><!--end sitebar-->
+            </div>
+            <!--end sitebar-->
 
             <div class="single-advance-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="wrap-show-advance-info-box style-1 box-in-site">
                     <h3 class="title-box">Related Products</h3>
                     <div class="wrap-products">
-                        <div class="products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"3"},"1200":{"items":"5"}}' >
+                        <div class="products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5"
+                            data-loop="false" data-nav="true" data-dots="false"
+                            data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"3"},"1200":{"items":"5"}}'>
 
                             @foreach ($related_products as $r_product)
 
-                            <div class="product product-style-2 equal-elem ">
-                                <div class="product-thumnail">
-                                    <a href="{{route('product.details',['slug'=>$r_product->slug])}}" title="{{$r_product->name}}">
-                                        <figure><img src="{{ asset('assets/images/products')}}/{{$r_product->image}}" width="214" height="214" alt="{{$r_product->name}}"></figure>
-                                    </a>
-                                    <div class="group-flash">
-                                        <span class="flash-item new-label">new</span>
+                                <div class="product product-style-2 equal-elem ">
+                                    <div class="product-thumnail">
+                                        <a href="{{ route('product.details', ['slug' => $r_product->slug]) }}"
+                                            title="{{ $r_product->name }}">
+                                            <figure><img
+                                                    src="{{ asset('assets/images/products') }}/{{ $r_product->image }}"
+                                                    width="214" height="214" alt="{{ $r_product->name }}"></figure>
+                                        </a>
+                                        <div class="group-flash">
+                                            <span class="flash-item new-label">new</span>
+                                        </div>
+                                        <div class="wrap-btn">
+                                            <a href="#" class="function-link">quick view</a>
+                                        </div>
                                     </div>
-                                    <div class="wrap-btn">
-                                        <a href="#" class="function-link">quick view</a>
+                                    <div class="product-info">
+                                        <a href="{{ route('product.details', ['slug' => $r_product->slug]) }}"
+                                            class="product-name"><span>{{ $r_product->name }}</span></a>
+                                        <div class="wrap-price"><span
+                                                class="product-price">${{ $r_product->regular_price }}</span></div>
                                     </div>
                                 </div>
-                                <div class="product-info">
-                                    <a href="{{route('product.details',['slug'=>$r_product->slug])}}" class="product-name"><span>{{$r_product->name}}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{$r_product->regular_price}}</span></div>
-                                </div>
-                            </div>
-                                        @endforeach
+                            @endforeach
                         </div>
-                    </div><!--End wrap-products-->
+                    </div>
+                    <!--End wrap-products-->
                 </div>
             </div>
 
-        </div><!--end row-->
+        </div>
+        <!--end row-->
 
-    </div><!--end container-->
+    </div>
+    <!--end container-->
 
 </main>
