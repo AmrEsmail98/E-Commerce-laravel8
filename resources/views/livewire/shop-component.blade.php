@@ -1,7 +1,5 @@
 <main id="main" class="main-site left-sidebar">
-
     <div class="container">
-
         <div class="wrap-breadcrumb">
             <ul>
                 <li class="item-link"><a href="#" class="link">home</a></li>
@@ -9,17 +7,13 @@
             </ul>
         </div>
         <div class="row">
-
             <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
-
                 <div class="banner-shop">
                     <a href="#" class="banner-link">
                         <figure><img src="{{asset('assets/images/shop-banner.jpg')}}" alt=""></figure>
                     </a>
                 </div>
-
                 <div class="wrap-shop-control">
-
                     <h1 class="shop-title">Digital & Electronics</h1>
 
                     <div class="wrap-right">
@@ -54,9 +48,34 @@
 
                 </div><!--end wrap shop control-->
 
+                       <style>
+                          .product-wish{
+                              position: absolute;
+                              top: 0%;
+                              left: 0;
+                              z-index: 99;
+                              right: 1px;
+                              text-align: right;
+                              padding-top: 8px;
+                          }
+                          .product-wish .fa{
+                              color: #cbcbcb;
+                              font-size: 32px;
+                          }
+                          .product-wish .fa:hover{
+                              color: #ff7007;
+                          }
+                          .fill-heart{
+                            color: #ff7007 !important;
+                          }
+                           </style>
+
                 <div class="row">
 
                     <ul class="product-list grid-products equal-container">
+                        @php
+                            $witems=Cart::instance('wishlist')->content()->pluck('id');
+                        @endphp
                        @foreach ($products as $product)
                         <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
                             <div class="product product-style-3 equal-elem ">
@@ -69,6 +88,13 @@
                                     <a href="{{route('product.details',['slug'=>$product->slug])}}" class="product-name"><span>{{$product->name}}</span></a>
                                     <div class="wrap-price"><span class="product-price">{{$product->regular_price}}</span></div>
                                     <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add To Cart</a>
+                                    <div class="product-wish">
+                                    @if($witems->contains($product->id))
+                                     <a href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fa fa-heart fill-heart"></i></a>
+                                     @else
+                                     <a href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fa fa-heart"></i></a>
+                                     @endif
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -124,7 +150,7 @@
                     <h2 class="widget-title">Price <span class="text-info">$ {{$min_price}} - $ {{$max_price}} </span></h2>
                     <div class="widget-content">
                       <div id="slider" wire:ignore> </div>
-                       
+
                     </div>
                 </div><!-- Price-->
                 <br><br>
